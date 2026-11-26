@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngiLab — Engineering Practice Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <nav class="navbar-inner" aria-label="Main Navigation">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <span>EngiLab</span>
+      </a>
+
+      <ul class="nav-links">
+        <li>
+          <a href="index.html" class="nav-link nav-link--active" aria-current="page">Dashboard</a>
+        </li>
+        <li>
+          <a href="languages.html" class="nav-link">Programming Languages</a>
+        </li>
+        <li>
+          <span class="nav-link nav-link--disabled" aria-disabled="true">
+            UI &amp; AI Lab <span class="phase-badge">Phase 2</span>
+          </span>
+        </li>
+        <li>
+          <span class="nav-link nav-link--disabled" aria-disabled="true">
+            GenAI Automation <span class="phase-badge">Phase 3</span>
+          </span>
+        </li>
+      </ul>
+
+      <div class="nav-stats" aria-label="Student Progress">
+        <span id="nav-streak" class="stat-pill stat-pill--streak" title="Daily Streak">🔥 0d</span>
+        <span id="nav-xp" class="stat-pill stat-pill--xp" title="Total XP">0 XP</span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Section 1: Student Status Bar -->
+    <section class="card status-bar" aria-label="Student Status">
+      <div class="status-intro">
+        <h1>Welcome back, Engineer</h1>
+        <p>Sharpen core language mechanics, standard libraries, and daily output prediction.</p>
+      </div>
+
+      <div class="status-metrics">
+        <div class="metric-box">
+          <span class="metric-label">Current Streak</span>
+          <span id="status-streak" class="metric-value">0 days</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">Total XP</span>
+          <span id="status-xp" class="metric-value">0 XP</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">Daily Puzzle</span>
+          <span id="status-daily" class="metric-value">Pending</span>
+        </div>
+        <a href="languages.html" class="btn btn--primary">Explore Programming Languages →</a>
+      </div>
+    </section>
+
+    <!-- Section 2: Daily Logic Arena (2-Column Split Card) -->
+    <section class="arena-grid" aria-label="Daily Logic Arena">
+      <!-- Left Column: Daily Puzzle -->
+      <article class="card">
+        <div class="section-header">
+          <h2 class="section-title">Daily Logic Puzzle</h2>
+          <span id="daily-status-badge" class="tag tag--amber">+50 XP Available</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.92rem;">
+          Predict the exact stdout of this Python snippet before running it mentally:
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <div class="code-dots"><span></span><span></span><span></span></div>
+            <span>daily_challenge.py</span>
+          </div>
+          <pre class="code-block"><code id="daily-code"></code></pre>
+        </div>
+
+        <form id="daily-puzzle-form">
+          <div id="daily-options" class="puzzle-options" role="radiogroup" aria-label="Daily Puzzle Options"></div>
+          <button id="daily-submit-btn" type="submit" class="btn btn--primary">Submit Answer</button>
+        </form>
+
+        <div id="daily-feedback" class="feedback-box hidden" role="status"></div>
+      </article>
+
+      <!-- Right Column: Top 10 Leaderboard -->
+      <aside class="card" aria-label="Top 10 Leaderboard">
+        <div class="section-header">
+          <h2 class="section-title">Top 10 Leaderboard</h2>
+          <span class="tag tag--cyan">Live XP Rank</span>
+        </div>
+
+        <div class="leaderboard-table-wrap">
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Student</th>
+                <th>Track</th>
+                <th style="text-align: right;">XP</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body"></tbody>
+          </table>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Section 3: Competition Goal Tracker (Phase 1.5 Preview Card) -->
+    <section class="card tracker-card" aria-label="Competition Goal Tracker">
+      <div class="section-header">
+        <h2 class="section-title">Competition Goal Tracker</h2>
+        <span class="tag tag--indigo">Phase 1.5 Preview · Locked</span>
+      </div>
+      <p style="color: var(--text-secondary); font-size: 0.92rem;">
+        Split-track daily roadmaps are coming in Phase 1.5. Vote on which track you want prioritized first:
+      </p>
+
+      <div class="tracks-grid">
+        <div class="track-option">
+          <h3>
+            <span>Track A: ICPC Competitive Coding</span>
+            <span class="tag tag--indigo">Algorithms</span>
+          </h3>
+          <p>Daily C++/Python STL drills, graph &amp; DP templates, and time-complexity speedruns.</p>
+          <div class="poll-bar-bg">
+            <div id="poll-bar-icpc" class="poll-bar-fill poll-bar-fill--icpc" style="width: 47%;"></div>
+          </div>
+          <div class="poll-meta">
+            <span id="poll-meta-icpc">47% (142 votes)</span>
+            <button id="vote-icpc-btn" type="button" class="btn btn--outline-indigo">Vote ICPC</button>
+          </div>
+        </div>
+
+        <div class="track-option">
+          <h3>
+            <span>Track B: GSoC Open Source</span>
+            <span class="tag tag--emerald">Engineering</span>
+          </h3>
+          <p>Codebase navigation, Git workflows, PR review challenges, and systems debugging.</p>
+          <div class="poll-bar-bg">
+            <div id="poll-bar-gsoc" class="poll-bar-fill poll-bar-fill--gsoc" style="width: 53%;"></div>
+          </div>
+          <div class="poll-meta">
+            <span id="poll-meta-gsoc">53% (158 votes)</span>
+            <button id="vote-gsoc-btn" type="button" class="btn btn--outline-emerald">Vote GSoC</button>
+          </div>
+        </div>
+      </div>
+
+      <p id="poll-user-status" style="font-size: 0.85rem; color: var(--text-muted);"></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    EngiLab Phase 1 (MVP) · Built with semantic HTML5, CSS3 &amp; Modular ES6+
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/leaderboard.js"></script>
+</body>
+</html>

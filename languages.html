@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngiLab — Programming Languages Lab</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <nav class="navbar-inner" aria-label="Main Navigation">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <span>EngiLab</span>
+      </a>
+
+      <ul class="nav-links">
+        <li>
+          <a href="index.html" class="nav-link">Dashboard</a>
+        </li>
+        <li>
+          <a href="languages.html" class="nav-link nav-link--active" aria-current="page">Programming Languages</a>
+        </li>
+        <li>
+          <span class="nav-link nav-link--disabled" aria-disabled="true">
+            UI &amp; AI Lab <span class="phase-badge">Phase 2</span>
+          </span>
+        </li>
+        <li>
+          <span class="nav-link nav-link--disabled" aria-disabled="true">
+            GenAI Automation <span class="phase-badge">Phase 3</span>
+          </span>
+        </li>
+      </ul>
+
+      <div class="nav-stats" aria-label="Student Progress">
+        <span id="nav-streak" class="stat-pill stat-pill--streak" title="Daily Streak">🔥 0d</span>
+        <span id="nav-xp" class="stat-pill stat-pill--xp" title="Total XP">0 XP</span>
+      </div>
+    </nav>
+  </header>
+
+  <div class="ide-shell">
+    <!-- Auto-Minimizing Top Language Header -->
+    <section id="top-lang-header" class="card hub-header" aria-label="Programming Languages Header">
+      <div class="workspace-banner">
+        <div class="hub-title-group">
+          <h1>Programming Languages Lab</h1>
+          <p>Choose a language to lock your workspace and launch dedicated developer tools.</p>
+        </div>
+        <span id="active-workspace-badge" class="tag tag--cyan">Select a Language</span>
+      </div>
+
+      <div id="language-selector" class="lang-selector-grid" role="group" aria-label="Select Programming Language">
+        <button type="button" class="lang-card" data-lang="Python" aria-pressed="false">
+          <span class="lang-card__name">Python</span>
+          <span class="lang-card__tag">3.x · Built-ins</span>
+        </button>
+        <button type="button" class="lang-card" data-lang="C++" aria-pressed="false">
+          <span class="lang-card__name">C++</span>
+          <span class="lang-card__tag">STL · Pointers</span>
+        </button>
+        <button type="button" class="lang-card" data-lang="C" aria-pressed="false">
+          <span class="lang-card__name">C</span>
+          <span class="lang-card__tag">Memory · libc</span>
+        </button>
+        <button type="button" class="lang-card" data-lang="Java" aria-pressed="false">
+          <span class="lang-card__name">Java</span>
+          <span class="lang-card__tag">JVM · Collections</span>
+        </button>
+        <button type="button" class="lang-card" data-lang="Go" aria-pressed="false">
+          <span class="lang-card__name">Go</span>
+          <span class="lang-card__tag">Slices · Defer</span>
+        </button>
+        <button type="button" class="lang-card" data-lang="Rust" aria-pressed="false">
+          <span class="lang-card__name">Rust</span>
+          <span class="lang-card__tag">Ownership · Vec</span>
+        </button>
+        <button type="button" class="lang-card" data-lang="SQL" aria-pressed="false">
+          <span class="lang-card__name">SQL</span>
+          <span class="lang-card__tag">Queries · Indexes</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Full-Height Two-Column IDE Workspace -->
+    <div id="lab-layout" class="lab-layout">
+      <aside class="card lab-sidebar" aria-label="Language Lab Tools">
+        <!-- Compact Hover-to-Expand Language Switcher Pill -->
+        <div id="sidebar-lang-switcher" class="lang-pill-switcher hidden">
+          <button type="button" class="lang-pill-btn" aria-haspopup="true" aria-label="Switch Language">
+            <span>
+              <span class="lang-pill-code">&lt;/&gt;</span>
+              <span id="sidebar-lang-pill-name">Python</span>
+            </span>
+            <span class="lang-pill-caret">▾</span>
+          </button>
+
+          <div id="sidebar-lang-popover" class="lang-popover" role="menu" aria-label="Switch Language">
+            <div class="lang-popover-grid">
+              <button type="button" class="lang-card" data-lang="Python">
+                <span class="lang-card__name">Python</span>
+              </button>
+              <button type="button" class="lang-card" data-lang="C++">
+                <span class="lang-card__name">C++</span>
+              </button>
+              <button type="button" class="lang-card" data-lang="C">
+                <span class="lang-card__name">C</span>
+              </button>
+              <button type="button" class="lang-card" data-lang="Java">
+                <span class="lang-card__name">Java</span>
+              </button>
+              <button type="button" class="lang-card" data-lang="Go">
+                <span class="lang-card__name">Go</span>
+              </button>
+              <button type="button" class="lang-card" data-lang="Rust">
+                <span class="lang-card__name">Rust</span>
+              </button>
+              <button type="button" class="lang-card" data-lang="SQL">
+                <span class="lang-card__name">SQL</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 id="sidebar-tools-heading" class="sidebar-heading">PYTHON TOOLS</h2>
+          <ul id="language-tools-list" class="sidebar-tools-list">
+            <li>
+              <button
+                id="tool-topics-btn"
+                data-tool="topics"
+                type="button"
+                class="sidebar-item sidebar-item--active active"
+                aria-current="page"
+              >
+                <span>Topics &amp; Notes</span>
+              </button>
+            </li>
+            <li>
+              <button
+                id="tool-mcq-btn"
+                data-tool="mcq"
+                type="button"
+                class="sidebar-item"
+              >
+                <span>MCQ Practice</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Workspace: Explicit #topics-view and #mcq-view containers -->
+      <main class="lab-workspace">
+        <div id="topics-view" class="topics-reader-layout">
+          <!-- Inner Topic Navigation List (Minimized 44px by default, Hover/Click-to-Expand 280px) -->
+          <section id="topics-index-panel" class="card topics-index-panel is-collapsed" aria-label="Topics Navigation">
+            <button
+              id="topics-rail-btn"
+              type="button"
+              class="topics-rail-btn"
+              title="Expand Topics (or hover)"
+              aria-label="Expand Topics"
+            >
+              <span class="topics-rail-icon">☰</span>
+              <span class="topics-rail-label">TOPICS</span>
+            </button>
+
+            <div id="topics-nav-inner" class="topics-nav-inner">
+              <div class="topics-nav-header">
+                <input
+                  id="topic-search-input"
+                  type="search"
+                  class="topic-search-input"
+                  placeholder="Filter topics..."
+                  aria-label="Filter topics"
+                />
+                <button
+                  id="collapse-topics-btn"
+                  type="button"
+                  class="topics-collapse-btn"
+                  title="Collapse topics"
+                  aria-label="Collapse topics"
+                >
+                  «
+                </button>
+              </div>
+              <div id="topics-grouped-list"></div>
+            </div>
+          </section>
+
+          <!-- Notes & Code Example Viewer (Full Remaining Width) -->
+          <article class="card topics-content-panel" aria-label="Topic Notes and Code">
+            <div class="topic-viewer-header">
+              <div style="display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;">
+                <button
+                  id="expand-topics-btn"
+                  type="button"
+                  class="topics-expand-btn"
+                  title="Show all topics"
+                  aria-label="Show all topics"
+                >
+                  ☰ All Topics
+                </button>
+                <h2 id="topic-viewer-title">Loading topic...</h2>
+              </div>
+              <div class="topic-header-meta">
+                <span id="topic-viewer-lang" class="tag tag--cyan">Python</span>
+                <span id="topic-viewer-section" class="tag tag--purple">Section 1</span>
+                <span id="topic-viewer-badge" class="tag tag--emerald">Beginner</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Textbook Content Container -->
+            <div id="topic-viewer-body" class="topic-viewer-body">
+              <!-- Rendered dynamically by js/topics.js -->
+            </div>
+
+            <div class="topic-pager">
+              <button id="prev-topic-btn" type="button" class="btn btn--secondary">← Previous Topic</button>
+              <span id="topic-step-counter" style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted);">1 / 14</span>
+              <button id="next-topic-btn" type="button" class="btn btn--primary">Next Topic →</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Fallback for languages without topics yet -->
+        <div id="topics-fallback" class="workspace-empty hidden" role="status">
+          <div class="workspace-empty-icon">&lt;/&gt;</div>
+          <h2 id="topics-fallback-title">Coming Soon</h2>
+          <p id="topics-fallback-text">
+            Topics for this language coming soon—switch to Python to explore all 32 modules.
+          </p>
+          <button id="switch-to-python-btn" type="button" class="btn btn--primary" style="margin-top: 0.5rem;">
+            Switch to Python
+          </button>
+        </div>
+
+        <!-- MCQ Practice Workspace (Clean Empty State + Full Interactive 3-Stage Quiz Engine) -->
+        <div id="mcq-view" class="mcq-workspace-layout" style="display: none;" aria-label="MCQ Practice Workspace">
+          <!-- State 1: Graceful Empty State (When language has 0 questions) -->
+          <div id="mcq-empty-state" class="workspace-empty card" role="status">
+            <div class="workspace-empty-icon">📝</div>
+            <h2 id="mcq-empty-title">Python MCQ Practice</h2>
+            <p id="mcq-empty-desc">
+              No practice questions added for Python yet. Add MCQs to <code>data/questions.json</code> to unlock concept clarity quizzes.
+            </p>
+            <button id="mcq-empty-back-btn" type="button" class="btn btn--primary" style="margin-top: 0.5rem;">
+              ← Back to Topics &amp; Notes
+            </button>
+          </div>
+
+          <!-- State 2: Stage 1 - Quiz Setup Screen -->
+          <div id="mcq-setup-screen" class="card mcq-panel hidden">
+            <div class="mcq-panel-header">
+              <div>
+                <span id="mcq-setup-lang-badge" class="tag tag--cyan">Python</span>
+                <h2 id="mcq-setup-title">Concept Clarity Practice</h2>
+              </div>
+              <span id="mcq-bank-counter" class="tag tag--emerald">0 Curated MCQs Available</span>
+            </div>
+
+            <div class="mcq-info-banner">
+              <span class="info-icon">💡</span>
+              <div>
+                <strong>Concept Clarity Mode:</strong>
+                <p>Instant engineering feedback, code traces, and memory/complexity breakdowns after every question.</p>
+              </div>
+            </div>
+
+            <div class="mcq-setup-section">
+              <h3 class="mcq-section-heading">Filter Topics</h3>
+              <div id="mcq-topic-checkboxes" class="mcq-topics-grid">
+                <!-- Dynamically populated from questions in selected language -->
+              </div>
+            </div>
+
+            <div class="mcq-setup-section">
+              <h3 class="mcq-section-heading">Question Count</h3>
+              <div class="mcq-count-options">
+                <label class="mcq-radio-pill">
+                  <input type="radio" name="mcq-count" value="5" checked />
+                  <span>5 Questions</span>
+                </label>
+                <label class="mcq-radio-pill">
+                  <input type="radio" name="mcq-count" value="10" />
+                  <span>10 Questions</span>
+                </label>
+                <label class="mcq-radio-pill">
+                  <input type="radio" name="mcq-count" value="all" />
+                  <span>All Available</span>
+                </label>
+              </div>
+            </div>
+
+            <div id="mcq-setup-error" class="feedback-box feedback-box--error hidden" style="margin-top: 1rem;"></div>
+
+            <div class="mcq-actions-row">
+              <button id="mcq-back-to-topics-btn" type="button" class="btn btn--secondary">
+                ← Back to Topics
+              </button>
+              <button id="mcq-start-btn" type="button" class="btn btn--primary">
+                Start MCQ Practice →
+              </button>
+            </div>
+          </div>
+
+          <!-- State 3: Stage 2 - Active Question Arena -->
+          <div id="mcq-arena" class="card mcq-panel hidden">
+            <div class="mcq-arena-header">
+              <div class="mcq-progress-info">
+                <span id="mcq-progress-text">Question 1 of 5</span>
+                <span id="mcq-topic-badge" class="tag tag--purple">General</span>
+              </div>
+              <div class="mcq-xp-badge">
+                <span id="mcq-session-xp">+0 XP</span>
+              </div>
+            </div>
+
+            <div class="progress-track" style="margin-top: 0.6rem; margin-bottom: 1.25rem;">
+              <div id="mcq-progress-fill" class="progress-fill" style="width: 20%;"></div>
+            </div>
+
+            <div class="mcq-question-content">
+              <h3 id="mcq-question-prompt" class="mcq-prompt-text">Loading question...</h3>
+
+              <div id="mcq-code-wrapper" class="code-wrapper hidden" style="margin: 1rem 0;">
+                <div class="code-header">
+                  <div class="code-dots"><span></span><span></span><span></span></div>
+                  <span id="mcq-code-filename">snippet</span>
+                </div>
+                <pre class="code-block"><code id="mcq-code-block"></code></pre>
+              </div>
+
+              <div id="mcq-options" class="quiz-options">
+                <!-- Rendered dynamically -->
+              </div>
+
+              <!-- Instant Feedback & Explanation Box -->
+              <div id="mcq-explanation-box" class="feedback-box hidden" style="margin-top: 1.25rem;">
+                <div id="mcq-feedback-status" class="mcq-feedback-status"></div>
+                <div id="mcq-feedback-explanation" class="mcq-feedback-text"></div>
+              </div>
+
+              <div class="quiz-footer">
+                <button id="mcq-next-btn" type="button" class="btn btn--primary hidden">
+                  Next Question →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- State 4: Stage 3 - Concept Clarity Scorecard -->
+          <div id="mcq-scorecard" class="card mcq-panel summary-card hidden">
+            <div class="summary-trophy">🏆</div>
+            <h2 id="mcq-scorecard-title">Practice Session Complete!</h2>
+            <div id="mcq-score-display" class="summary-score">0 / 0</div>
+            <p id="mcq-score-sub" class="summary-sub">0% Accuracy · Earned +0 XP</p>
+
+            <div class="mcq-scorecard-breakdown">
+              <h3 style="font-size: 1rem; color: var(--text-primary); margin-bottom: 0.75rem;">Concept Clarity Breakdown</h3>
+              <div id="mcq-topic-accuracy-list" class="topic-accuracy-list">
+                <!-- Dynamically populated topic-wise performance -->
+              </div>
+            </div>
+
+            <div class="mcq-actions-row" style="justify-content: center; gap: 0.85rem; margin-top: 1.75rem;">
+              <button id="mcq-practice-again-btn" type="button" class="btn btn--primary">
+                Practice Again
+              </button>
+              <button id="mcq-scorecard-topics-btn" type="button" class="btn btn--secondary">
+                Review Topics &amp; Notes
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/quiz-engine.js"></script>
+  <script type="module" src="js/topics.js"></script>
+</body>
+</html>

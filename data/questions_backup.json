@@ -1,0 +1,632 @@
+[
+  {
+    "id": "py-1",
+    "language": "Python",
+    "topic": "Lists & Vectors",
+    "question": "What is the output of this Python list slicing and mutation snippet?",
+    "code": "a = [1, 2, 3, 4]\nb = a[:]\nb.append(5)\nprint(len(a), a is b)",
+    "options": [
+      "4 False",
+      "5 True",
+      "4 True",
+      "5 False"
+    ],
+    "correctIndex": 0,
+    "explanation": "Slicing with `[:]` creates a new shallow copy of the list, so mutating `b` does not affect `a` and `a is b` evaluates to `False`."
+  },
+  {
+    "id": "py-2",
+    "language": "Python",
+    "topic": "Standard Library",
+    "question": "What does `sorted()` return when called on a dictionary with custom key sorting?",
+    "code": "scores = {'alice': 90, 'bob': 75, 'carol': 90}\nres = sorted(scores, key=lambda k: (-scores[k], k))\nprint(res)",
+    "options": [
+      "['alice', 'carol', 'bob']",
+      "['carol', 'alice', 'bob']",
+      "[('alice', 90), ('carol', 90), ('bob', 75)]",
+      "['bob', 'alice', 'carol']"
+    ],
+    "correctIndex": 0,
+    "explanation": "Iterating a dict yields its keys, and `sorted()` returns a new list of keys ordered by descending score first and ascending alphabetical key on ties."
+  },
+  {
+    "id": "py-3",
+    "language": "Python",
+    "topic": "Strings",
+    "question": "What is printed by `str.partition()` when the separator is not found?",
+    "code": "s = \"engilab_v1\"\nprint(s.partition(\":\"))",
+    "options": [
+      "('engilab_v1', '', '')",
+      "['engilab_v1']",
+      "('', '', 'engilab_v1')",
+      "Raises ValueError"
+    ],
+    "correctIndex": 0,
+    "explanation": "When the separator is absent, `str.partition()` always returns a 3-tuple containing the original string followed by two empty strings."
+  },
+  {
+    "id": "py-4",
+    "language": "Python",
+    "topic": "Memory & Pointers",
+    "question": "What happens when a mutable default argument is used across multiple calls?",
+    "code": "def add_item(x, bag=[]):\n    bag.append(x)\n    return bag\n\nprint(add_item(1))\nprint(add_item(2))",
+    "options": [
+      "[1] then [1, 2]",
+      "[1] then [2]",
+      "[1] then [2, 1]",
+      "Raises UnboundLocalError"
+    ],
+    "correctIndex": 0,
+    "explanation": "Default argument objects in Python are bound once at function definition time, so `bag` persists and mutates across subsequent calls."
+  },
+  {
+    "id": "py-5",
+    "language": "Python",
+    "topic": "Lists & Vectors",
+    "question": "What is the time complexity of `x in data` when `data` is a Python `list` vs a `set` of size N?",
+    "code": "items_list = list(range(100000))\nitems_set = set(items_list)\n# Compare: 99999 in items_list vs 99999 in items_set",
+    "options": [
+      "O(N) for list, O(1) average for set",
+      "O(log N) for list, O(1) for set",
+      "O(N) for both list and set",
+      "O(1) for list, O(log N) for set"
+    ],
+    "correctIndex": 0,
+    "explanation": "`list` membership performs a linear scan in O(N) time, whereas `set` uses a hash table for O(1) average-case lookup."
+  },
+  {
+    "id": "py-6",
+    "language": "Python",
+    "topic": "Standard Library",
+    "question": "What does `collections.deque(maxlen=3)` output after appending four elements?",
+    "code": "from collections import deque\ndq = deque([10, 20], maxlen=3)\ndq.append(30)\ndq.append(40)\nprint(list(dq))",
+    "options": [
+      "[20, 30, 40]",
+      "[10, 20, 30]",
+      "[10, 20, 40]",
+      "Raises IndexError"
+    ],
+    "correctIndex": 0,
+    "explanation": "A bounded `deque` automatically discards the oldest element from the opposite end in O(1) time when appending beyond `maxlen`."
+  },
+  {
+    "id": "cpp-1",
+    "language": "C++",
+    "topic": "Memory & Pointers",
+    "question": "What does this pointer arithmetic snippet print on a 64-bit system?",
+    "code": "int arr[] = {10, 20, 30, 40};\nint* p = arr + 1;\nint* q = arr + 3;\ncout << (q - p) << \" \" << *(p + 1);",
+    "options": [
+      "2 30",
+      "8 30",
+      "2 20",
+      "8 40"
+    ],
+    "correctIndex": 0,
+    "explanation": "Subtracting two `int*` pointers yields the number of `int` elements between them (2), and `*(p + 1)` dereferences `arr[2]` which is 30."
+  },
+  {
+    "id": "cpp-2",
+    "language": "C++",
+    "topic": "Lists & Vectors",
+    "question": "What happens to `v.size()` and `v.capacity()` after `v.clear()` on a `std::vector<int>`?",
+    "code": "vector<int> v = {1, 2, 3, 4, 5};\nv.reserve(16);\nv.clear();\ncout << v.size() << \" \" << (v.capacity() >= 16);",
+    "options": [
+      "0 1",
+      "0 0",
+      "5 1",
+      "Undefined behavior"
+    ],
+    "correctIndex": 0,
+    "explanation": "`std::vector::clear()` destroys all elements so `size()` becomes 0, while preserving the allocated buffer so `capacity()` remains at least 16."
+  },
+  {
+    "id": "cpp-3",
+    "language": "C++",
+    "topic": "Standard Library",
+    "question": "What does `std::lower_bound` return on a sorted vector when the target is present?",
+    "code": "vector<int> v = {2, 4, 4, 4, 8};\nauto it = lower_bound(v.begin(), v.end(), 4);\ncout << (it - v.begin());",
+    "options": [
+      "1",
+      "3",
+      "4",
+      "0"
+    ],
+    "correctIndex": 0,
+    "explanation": "`std::lower_bound` uses binary search in O(log N) time to return an iterator to the first element not less than 4, which is at index 1."
+  },
+  {
+    "id": "cpp-4",
+    "language": "C++",
+    "topic": "Strings",
+    "question": "What is the return value of `std::string::find()` when a substring is not found?",
+    "code": "string s = \"algorithm\";\nsize_t pos = s.find(\"xyz\");\ncout << (pos == string::npos);",
+    "options": [
+      "1",
+      "0",
+      "-1 (signed)",
+      "Throws std::out_of_range"
+    ],
+    "correctIndex": 0,
+    "explanation": "When no match exists, `std::string::find()` returns `std::string::npos` (the maximum `size_t` value), making the comparison `true` (1)."
+  },
+  {
+    "id": "cpp-5",
+    "language": "C++",
+    "topic": "Memory & Pointers",
+    "question": "What is printed when passing a `std::unique_ptr<int>` via `std::move`?",
+    "code": "auto a = make_unique<int>(42);\nauto b = move(a);\ncout << (a == nullptr) << \" \" << *b;",
+    "options": [
+      "1 42",
+      "0 42",
+      "Compile-time error",
+      "1 0"
+    ],
+    "correctIndex": 0,
+    "explanation": "`std::move` transfers sole ownership from `a` to `b`, leaving `a` as `nullptr` while `b` owns the heap-allocated value 42."
+  },
+  {
+    "id": "cpp-6",
+    "language": "C++",
+    "topic": "Standard Library",
+    "question": "What is the worst-case time complexity of inserting N elements into `std::unordered_map` vs `std::map`?",
+    "code": "unordered_map<int, int> umap;\nmap<int, int> omap;\n// Inserting N distinct keys",
+    "options": [
+      "O(N^2) for unordered_map, O(N log N) for map",
+      "O(N) for unordered_map, O(N) for map",
+      "O(N log N) for both",
+      "O(N) for unordered_map, O(N^2) for map"
+    ],
+    "correctIndex": 0,
+    "explanation": "`std::unordered_map` has O(N) average insertion per N items but O(N^2) worst-case under hash collisions, whereas `std::map` guarantees O(N log N) via a balanced tree."
+  },
+  {
+    "id": "c-1",
+    "language": "C",
+    "topic": "Memory & Pointers",
+    "question": "What is the difference between `sizeof(arr)` inside `main` vs inside `fn(int arr[])`?",
+    "code": "void fn(int arr[]) {\n    printf(\"%zu \", sizeof(arr));\n}\nint main() {\n    int arr[5] = {1, 2, 3, 4, 5};\n    printf(\"%zu \", sizeof(arr));\n    fn(arr);\n}",
+    "options": [
+      "20 then 8 (on 64-bit)",
+      "20 then 20",
+      "5 then 1",
+      "8 then 8"
+    ],
+    "correctIndex": 0,
+    "explanation": "In `main`, `arr` is a 5-element `int` array (20 bytes), whereas as a function parameter `arr` decays to `int*` (8 bytes on 64-bit)."
+  },
+  {
+    "id": "c-2",
+    "language": "C",
+    "topic": "Strings",
+    "question": "What does `strlen` return compared to `sizeof` on a null-terminated string literal?",
+    "code": "char s[] = \"EngiLab\";\nprintf(\"%zu %zu\", strlen(s), sizeof(s));",
+    "options": [
+      "7 8",
+      "7 7",
+      "8 8",
+      "8 7"
+    ],
+    "correctIndex": 0,
+    "explanation": "`strlen()` counts characters up to (excluding) the null terminator `'\\0'`, while `sizeof(s)` includes the trailing `'\\0'` byte."
+  },
+  {
+    "id": "c-3",
+    "language": "C",
+    "topic": "Memory & Pointers",
+    "question": "How does `calloc(n, sizeof(int))` differ from `malloc(n * sizeof(int))`?",
+    "code": "int *a = malloc(4 * sizeof(int));\nint *b = calloc(4, sizeof(int));",
+    "options": [
+      "calloc zero-initializes all allocated bytes",
+      "malloc zero-initializes; calloc leaves garbage",
+      "calloc allocates on the stack",
+      "malloc automatically frees memory at scope exit"
+    ],
+    "correctIndex": 0,
+    "explanation": "`calloc` initializes every byte of the allocated heap block to zero, whereas `malloc` leaves the memory uninitialized."
+  },
+  {
+    "id": "c-4",
+    "language": "C",
+    "topic": "Lists & Vectors",
+    "question": "What does `*(arr + 2)` evaluate to when `int arr[] = {5, 10, 15, 20}`?",
+    "code": "int arr[] = {5, 10, 15, 20};\nint *p = arr;\nprintf(\"%d %d\", *(p + 2), 2[p]);",
+    "options": [
+      "15 15",
+      "10 15",
+      "15 followed by compile error",
+      "Undefined behavior"
+    ],
+    "correctIndex": 0,
+    "explanation": "In C, `a[b]` is defined as `*(a + b)`, so both `*(p + 2)` and `2[p]` evaluate to `arr[2]`, which is 15."
+  },
+  {
+    "id": "c-5",
+    "language": "C",
+    "topic": "Standard Library",
+    "question": "What is the time complexity of `qsort()` in standard C implementations and what must its comparator return?",
+    "code": "int cmp(const void *a, const void *b) {\n    return (*(int*)a - *(int*)b);\n}",
+    "options": [
+      "O(N log N) average; negative, 0, or positive int",
+      "O(N^2) average; boolean 0 or 1",
+      "O(N) average; pointer to smaller element",
+      "O(log N); void"
+    ],
+    "correctIndex": 0,
+    "explanation": "`qsort()` typically runs in O(N log N) average time and expects a comparator returning `< 0`, `0`, or `> 0`."
+  },
+  {
+    "id": "c-6",
+    "language": "C",
+    "topic": "Strings",
+    "question": "Why is `strncpy(dst, src, n)` considered error-prone if `strlen(src) >= n`?",
+    "code": "char dst[4];\nstrncpy(dst, \"ABCD\", sizeof(dst));",
+    "options": [
+      "It does not null-terminate dst when src length >= n",
+      "It always overflows dst by 1 byte",
+      "It frees src after copying",
+      "It returns NULL on success"
+    ],
+    "correctIndex": 0,
+    "explanation": "If the source string has at least `n` characters, `strncpy` copies `n` bytes without appending a `'\\0'` terminator."
+  },
+  {
+    "id": "java-1",
+    "language": "Java",
+    "topic": "Strings",
+    "question": "What does comparing a string literal and a `new String()` with `==` vs `.equals()` print?",
+    "code": "String a = \"code\";\nString b = new String(\"code\");\nSystem.out.println((a == b) + \" \" + a.equals(b));",
+    "options": [
+      "false true",
+      "true true",
+      "false false",
+      "true false"
+    ],
+    "correctIndex": 0,
+    "explanation": "`==` compares object references (`new String()` allocates a distinct heap object outside the string pool), whereas `.equals()` compares character contents."
+  },
+  {
+    "id": "java-2",
+    "language": "Java",
+    "topic": "Lists & Vectors",
+    "question": "What happens when you try to modify the list returned by `List.of()`?",
+    "code": "List<Integer> nums = List.of(1, 2, 3);\nnums.set(0, 99);",
+    "options": [
+      "Throws UnsupportedOperationException",
+      "Updates index 0 to 99",
+      "Compile-time error",
+      "Returns a new List"
+    ],
+    "correctIndex": 0,
+    "explanation": "`List.of()` creates an unmodifiable list, so any mutating method like `set()` or `add()` throws `UnsupportedOperationException` at runtime."
+  },
+  {
+    "id": "java-3",
+    "language": "Java",
+    "topic": "Memory & Pointers",
+    "question": "What does Java's Integer Cache print for these two autoboxed comparisons?",
+    "code": "Integer x = 127, y = 127;\nInteger p = 128, q = 128;\nSystem.out.println((x == y) + \" \" + (p == q));",
+    "options": [
+      "true false",
+      "true true",
+      "false false",
+      "false true"
+    ],
+    "correctIndex": 0,
+    "explanation": "Java caches `Integer` instances in the range -128 to 127, so `127` reuses the same object reference while `128` allocates two separate `Integer` objects."
+  },
+  {
+    "id": "java-4",
+    "language": "Java",
+    "topic": "Standard Library",
+    "question": "What is the output of `Collections.binarySearch` when the key is NOT found in a sorted `ArrayList`?",
+    "code": "List<Integer> list = Arrays.asList(10, 20, 30, 40);\nint idx = Collections.binarySearch(list, 25);\nSystem.out.println(idx);",
+    "options": [
+      "-3",
+      "-1",
+      "2",
+      "-2"
+    ],
+    "correctIndex": 0,
+    "explanation": "When absent, `Collections.binarySearch` returns `(-(insertionPoint) - 1)`, and since 25 would be inserted at index 2, it returns `-3`."
+  },
+  {
+    "id": "java-5",
+    "language": "Java",
+    "topic": "Lists & Vectors",
+    "question": "What occurs if you remove an element from an `ArrayList` directly inside a for-each loop?",
+    "code": "List<String> list = new ArrayList<>(List.of(\"A\", \"B\", \"C\"));\nfor (String s : list) {\n    if (s.equals(\"B\")) list.remove(s);\n}",
+    "options": [
+      "Throws ConcurrentModificationException",
+      "Removes \"B\" cleanly",
+      "Skips \"C\" without throwing",
+      "Compile-time error"
+    ],
+    "correctIndex": 0,
+    "explanation": "Modifying an `ArrayList` structurally during a fail-fast enhanced for-loop increments `modCount` without updating the iterator, throwing `ConcurrentModificationException`."
+  },
+  {
+    "id": "java-6",
+    "language": "Java",
+    "topic": "Standard Library",
+    "question": "What is the time complexity of `poll()` and `peek()` on Java's `PriorityQueue`?",
+    "code": "PriorityQueue<Integer> pq = new PriorityQueue<>();\npq.add(5); pq.add(1); pq.add(3);\nint top = pq.peek();\nint min = pq.poll();",
+    "options": [
+      "O(1) for peek(), O(log N) for poll()",
+      "O(log N) for peek(), O(log N) for poll()",
+      "O(1) for both peek() and poll()",
+      "O(N) for peek(), O(1) for poll()"
+    ],
+    "correctIndex": 0,
+    "explanation": "`PriorityQueue` is backed by a binary min-heap, allowing O(1) inspection of the root via `peek()` and O(log N) heapify-down removal via `poll()`."
+  },
+  {
+    "id": "go-1",
+    "language": "Go",
+    "topic": "Lists & Vectors",
+    "question": "What does this Go slice backing-array mutation snippet print?",
+    "code": "a := []int{1, 2, 3, 4}\nb := a[1:3]\nb[0] = 99\nfmt.Println(a[1], len(b), cap(b))",
+    "options": [
+      "99 2 3",
+      "2 2 3",
+      "99 2 2",
+      "2 2 4"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sub-slicing `a[1:3]` shares the underlying array of `a`, so writing `b[0] = 99` mutates `a[1]`, with `len(b) == 2` and `cap(b) == 3`."
+  },
+  {
+    "id": "go-2",
+    "language": "Go",
+    "topic": "Strings",
+    "question": "What does `len(s)` return for a Go string containing multi-byte UTF-8 runes?",
+    "code": "s := \"Go🚀\"\nfmt.Println(len(s))",
+    "options": [
+      "6",
+      "3",
+      "4",
+      "Compile-time error"
+    ],
+    "correctIndex": 0,
+    "explanation": "In Go, `len(s)` returns the byte count of the UTF-8 string (2 ASCII bytes + 4 bytes for `🚀` = 6), not the rune count."
+  },
+  {
+    "id": "go-3",
+    "language": "Go",
+    "topic": "Memory & Pointers",
+    "question": "What happens when you read from a `nil` map vs write to a `nil` map in Go?",
+    "code": "var m map[string]int\nv := m[\"key\"]\nm[\"key\"] = 1",
+    "options": [
+      "Read returns 0; write panics at runtime",
+      "Both read and write panic",
+      "Read returns 0; write allocates and succeeds",
+      "Compile-time error"
+    ],
+    "correctIndex": 0,
+    "explanation": "Reading a `nil` map safely returns the zero value (`0`), whereas assigning to a `nil` map triggers a runtime panic."
+  },
+  {
+    "id": "go-4",
+    "language": "Go",
+    "topic": "Standard Library",
+    "question": "In what order do multiple `defer` statements execute when a Go function returns?",
+    "code": "func trace() {\n    defer fmt.Print(\"A\")\n    defer fmt.Print(\"B\")\n    fmt.Print(\"C\")\n}",
+    "options": [
+      "CBA",
+      "CAB",
+      "ABC",
+      "BAC"
+    ],
+    "correctIndex": 0,
+    "explanation": "Deferred calls are pushed onto a stack and executed in LIFO (last-in, first-out) order after the surrounding function body finishes."
+  },
+  {
+    "id": "go-5",
+    "language": "Go",
+    "topic": "Lists & Vectors",
+    "question": "What happens to `a` if `append(b, 50)` exceeds `cap(b)` when `b` was sliced from `a`?",
+    "code": "a := []int{1, 2, 3}\nb := a[:2]\nb = append(b, 99)\nfmt.Println(a)",
+    "options": [
+      "[1 2 99]",
+      "[1 2 3]",
+      "[1 2 99 3]",
+      "Runtime panic"
+    ],
+    "correctIndex": 0,
+    "explanation": "Because `b` had spare capacity (`cap(b) == 3`), `append` writes `99` directly into `a[2]` without allocating a new backing array."
+  },
+  {
+    "id": "go-6",
+    "language": "Go",
+    "topic": "Standard Library",
+    "question": "What is the time complexity of `sort.Search(n, f)` in Go's `sort` package?",
+    "code": "idx := sort.Search(len(arr), func(i int) bool {\n    return arr[i] >= target\n})",
+    "options": [
+      "O(log N)",
+      "O(N)",
+      "O(N log N)",
+      "O(1)"
+    ],
+    "correctIndex": 0,
+    "explanation": "`sort.Search` uses binary search to find the smallest index `i` in `[0, n)` where `f(i)` is true in O(log N) time."
+  },
+  {
+    "id": "rust-1",
+    "language": "Rust",
+    "topic": "Memory & Pointers",
+    "question": "Why does this Rust snippet fail to compile?",
+    "code": "let s1 = String::from(\"engilab\");\nlet s2 = s1;\nprintln!(\"{}\", s1);",
+    "options": [
+      "Value s1 was moved into s2, so s1 is no longer valid",
+      "String::from is not in scope",
+      "s2 must be declared mut",
+      "println! requires a raw pointer"
+    ],
+    "correctIndex": 0,
+    "explanation": "`String` does not implement `Copy`, so assigning `s1` to `s2` moves ownership and invalidates `s1`."
+  },
+  {
+    "id": "rust-2",
+    "language": "Rust",
+    "topic": "Lists & Vectors",
+    "question": "What does `Vec::get(10)` return compared to indexing `v[10]` when index 10 is out of bounds?",
+    "code": "let v = vec![10, 20, 30];\nlet safe = v.get(10);",
+    "options": [
+      "v.get(10) returns None; v[10] panics",
+      "Both return None",
+      "Both panic at runtime",
+      "v.get(10) returns 0"
+    ],
+    "correctIndex": 0,
+    "explanation": "`Vec::get()` performs bounds checking and returns an `Option<&T>` (`None` if out of bounds), whereas `v[10]` panics."
+  },
+  {
+    "id": "rust-3",
+    "language": "Rust",
+    "topic": "Strings",
+    "question": "Why does Rust disallow direct integer indexing like `s[0]` on a `String`?",
+    "code": "let s = String::from(\"hello\");\n// let c = s[0];",
+    "options": [
+      "Strings are UTF-8 encoded, so byte indexing could split a multi-byte char",
+      "Strings are immutable in Rust",
+      "Strings are stored as linked lists",
+      "s[0] returns a float instead of char"
+    ],
+    "correctIndex": 0,
+    "explanation": "Because Rust `String`s are UTF-8 byte buffers, O(1) indexing by character index is ambiguous and could slice mid-codepoint."
+  },
+  {
+    "id": "rust-4",
+    "language": "Rust",
+    "topic": "Memory & Pointers",
+    "question": "What rule does Rust's borrow checker enforce for references in the same scope?",
+    "code": "let mut x = 10;\nlet r1 = &x;\nlet r2 = &mut x;\nprintln!(\"{} {}\", r1, r2);",
+    "options": [
+      "Cannot have a mutable reference while an immutable reference is active",
+      "Cannot have two immutable references at the same time",
+      "Mutable references must be Box<T>",
+      "References are only valid for integers"
+    ],
+    "correctIndex": 0,
+    "explanation": "Rust allows either multiple shared (`&T`) references OR one exclusive mutable (`&mut T`) reference at a time, preventing data races."
+  },
+  {
+    "id": "rust-5",
+    "language": "Rust",
+    "topic": "Standard Library",
+    "question": "What does `entry(k).or_insert(0)` on `std::collections::HashMap` do?",
+    "code": "let mut counts = HashMap::new();\n*counts.entry(\"py\").or_insert(0) += 1;",
+    "options": [
+      "Inserts 0 if key is absent, then returns &mut V to the value",
+      "Overwrites any existing key with 0",
+      "Returns Option<V> without inserting",
+      "Panics if the key is missing"
+    ],
+    "correctIndex": 0,
+    "explanation": "`HashMap::entry().or_insert(default)` avoids double hashing by inserting `default` only if missing and returning a mutable reference to the value."
+  },
+  {
+    "id": "rust-6",
+    "language": "Rust",
+    "topic": "Lists & Vectors",
+    "question": "What is the time complexity of `Vec::push()` vs `Vec::remove(0)` on a `Vec<T>` of length N?",
+    "code": "let mut v = vec![1, 2, 3, 4];\nv.push(5);\nv.remove(0);",
+    "options": [
+      "O(1) amortized for push, O(N) for remove(0)",
+      "O(1) for both",
+      "O(N) for push, O(1) for remove(0)",
+      "O(log N) for push, O(N) for remove(0)"
+    ],
+    "correctIndex": 0,
+    "explanation": "`Vec::push` appends at the end in O(1) amortized time, while `Vec::remove(0)` shifts all remaining elements left in O(N) time."
+  },
+  {
+    "id": "sql-1",
+    "language": "SQL",
+    "topic": "Joins & Subqueries",
+    "question": "What happens when a `LEFT JOIN` includes a filter on the right table in the `WHERE` clause instead of `ON`?",
+    "code": "SELECT u.id, o.total\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id\nWHERE o.status = 'PAID';",
+    "options": [
+      "It turns the LEFT JOIN into an effective INNER JOIN, dropping unmatched users",
+      "It keeps all users and sets o.total to 0",
+      "It raises a SQL syntax error",
+      "It duplicates unmatched user rows"
+    ],
+    "correctIndex": 0,
+    "explanation": "Unmatched `LEFT JOIN` rows have `NULL` for `o.status`, so `WHERE o.status = 'PAID'` filters them out just like an `INNER JOIN`."
+  },
+  {
+    "id": "sql-2",
+    "language": "SQL",
+    "topic": "Aggregations & Group By",
+    "question": "What is the key difference between `WHERE` and `HAVING` in a `GROUP BY` query?",
+    "code": "SELECT dept, COUNT(*) AS emp_cnt\nFROM employees\nWHERE salary > 50000\nGROUP BY dept\nHAVING COUNT(*) >= 5;",
+    "options": [
+      "WHERE filters rows before grouping; HAVING filters groups after aggregation",
+      "HAVING runs before WHERE",
+      "WHERE can filter on COUNT(*); HAVING cannot",
+      "They are identical aliases"
+    ],
+    "correctIndex": 0,
+    "explanation": "`WHERE` filters individual rows prior to `GROUP BY`, whereas `HAVING` filters aggregated groups after `COUNT(*)` is computed."
+  },
+  {
+    "id": "sql-3",
+    "language": "SQL",
+    "topic": "Window Functions",
+    "question": "How do `RANK()` and `DENSE_RANK()` behave on tied scores `[100, 100, 90]`?",
+    "code": "SELECT name, score,\n  RANK() OVER (ORDER BY score DESC) AS r,\n  DENSE_RANK() OVER (ORDER BY score DESC) AS dr\nFROM scores;",
+    "options": [
+      "RANK gives 1, 1, 3; DENSE_RANK gives 1, 1, 2",
+      "RANK gives 1, 2, 3; DENSE_RANK gives 1, 1, 2",
+      "RANK gives 1, 1, 2; DENSE_RANK gives 1, 1, 3",
+      "Both give 1, 1, 3"
+    ],
+    "correctIndex": 0,
+    "explanation": "`RANK()` leaves gaps after ties (1, 1, 3), whereas `DENSE_RANK()` assigns consecutive ranks without gaps (1, 1, 2)."
+  },
+  {
+    "id": "sql-4",
+    "language": "SQL",
+    "topic": "Indexes & Constraints",
+    "question": "Given a composite B-Tree index `(a, b)`, which query can efficiently use the index?",
+    "code": "CREATE INDEX idx_ab ON events (a, b);\n-- Query 1: WHERE a = 10 AND b = 20\n-- Query 2: WHERE b = 20",
+    "options": [
+      "Query 1 uses the index; Query 2 generally cannot (violates leftmost prefix)",
+      "Query 2 uses the index; Query 1 cannot",
+      "Neither query can use a composite index",
+      "Both queries perform O(1) hash lookups"
+    ],
+    "correctIndex": 0,
+    "explanation": "A B-Tree composite index `(a, b)` is ordered by `a` first, so filtering on `b` alone without `a` violates the leftmost-prefix rule."
+  },
+  {
+    "id": "sql-5",
+    "language": "SQL",
+    "topic": "Joins & Subqueries",
+    "question": "Why is `NOT IN (subquery)` dangerous if the subquery can return a `NULL` value?",
+    "code": "SELECT id FROM users\nWHERE id NOT IN (SELECT user_id FROM banned);",
+    "options": [
+      "If any banned.user_id is NULL, NOT IN evaluates to UNKNOWN and returns 0 rows",
+      "It treats NULL as 0 and excludes user 0",
+      "It throws a division-by-zero error",
+      "It automatically converts to NOT EXISTS"
+    ],
+    "correctIndex": 0,
+    "explanation": "In three-valued SQL logic, `id != NULL` is `UNKNOWN`, causing the entire `NOT IN` condition to evaluate to `UNKNOWN` and return no rows."
+  },
+  {
+    "id": "sql-6",
+    "language": "SQL",
+    "topic": "Window Functions",
+    "question": "What does `COUNT(*)` vs `COUNT(col)` return when `col` contains `NULL` values?",
+    "code": "SELECT COUNT(*), COUNT(bonus) FROM staff;",
+    "options": [
+      "COUNT(*) counts all rows; COUNT(bonus) skips NULLs",
+      "Both skip rows where bonus is NULL",
+      "COUNT(*) returns an error if any column is NULL",
+      "COUNT(bonus) counts NULLs as 0"
+    ],
+    "correctIndex": 0,
+    "explanation": "`COUNT(*)` counts every row in the group regardless of NULLs, whereas `COUNT(column)` counts only non-NULL values."
+  }
+]

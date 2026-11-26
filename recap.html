@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngiLab — Lab 1: Function Recap</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <header class="navbar">
+    <nav class="navbar-inner" aria-label="Main Navigation">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <span>EngiLab</span>
+      </a>
+
+      <ul class="nav-links">
+        <li>
+          <a href="index.html" class="nav-link">Dashboard</a>
+        </li>
+        <li>
+          <a href="recap.html" class="nav-link nav-link--active" aria-current="page">Function Recap</a>
+        </li>
+        <li>
+          <span class="nav-link nav-link--disabled" aria-disabled="true">
+            UI &amp; AI Lab <span class="phase-badge">Phase 2</span>
+          </span>
+        </li>
+        <li>
+          <span class="nav-link nav-link--disabled" aria-disabled="true">
+            GenAI Automation <span class="phase-badge">Phase 3</span>
+          </span>
+        </li>
+      </ul>
+
+      <div class="nav-stats" aria-label="Student Progress">
+        <span id="nav-streak" class="stat-pill stat-pill--streak" title="Daily Streak">🔥 0d</span>
+        <span id="nav-xp" class="stat-pill stat-pill--xp" title="Total XP">0 XP</span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Filter Control Panel -->
+    <section id="filter-panel" class="card" aria-label="Quiz Filter Controls">
+      <div class="section-header">
+        <h1 class="section-title">Lab 1: Function Recap Engine</h1>
+        <span class="tag tag--cyan">+10 XP per correct answer</span>
+      </div>
+      <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 1.25rem;">
+        Select your target languages and engineering topics to generate a custom practice session (up to 10 questions).
+      </p>
+
+      <div class="filter-grid">
+        <div>
+          <div class="filter-group-title">Languages</div>
+          <div class="checkbox-pills">
+            <label class="check-pill">
+              <input type="checkbox" name="filter-lang" value="Python" checked />
+              <span>Python</span>
+            </label>
+            <label class="check-pill">
+              <input type="checkbox" name="filter-lang" value="C++" checked />
+              <span>C++</span>
+            </label>
+            <label class="check-pill">
+              <input type="checkbox" name="filter-lang" value="Java" checked />
+              <span>Java</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <div class="filter-group-title">Topics</div>
+          <div class="checkbox-pills">
+            <label class="check-pill">
+              <input type="checkbox" name="filter-topic" value="Lists & Vectors" checked />
+              <span>Lists &amp; Vectors</span>
+            </label>
+            <label class="check-pill">
+              <input type="checkbox" name="filter-topic" value="Strings" checked />
+              <span>Strings</span>
+            </label>
+            <label class="check-pill">
+              <input type="checkbox" name="filter-topic" value="Memory & Pointers" checked />
+              <span>Memory &amp; Pointers</span>
+            </label>
+            <label class="check-pill">
+              <input type="checkbox" name="filter-topic" value="Standard Library" checked />
+              <span>Standard Library</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div id="filter-error" class="feedback-box feedback-box--error hidden" role="alert"></div>
+
+      <div class="filter-actions">
+        <span style="font-size: 0.85rem; color: var(--text-muted);">
+          Bank: 18 curated MCQs across built-ins, complexity &amp; edge cases
+        </span>
+        <button id="start-quiz-btn" type="button" class="btn btn--primary">
+          Start Practice Quiz
+        </button>
+      </div>
+    </section>
+
+    <!-- Interactive Quiz Arena -->
+    <section id="quiz-arena" class="card hidden" aria-label="Interactive Quiz Arena">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="quiz-progress-text">Question 1 of 10</span>
+          <div style="display: flex; gap: 0.45rem;">
+            <span id="quiz-lang-tag" class="tag tag--cyan">Python</span>
+            <span id="quiz-topic-tag" class="tag">Standard Library</span>
+          </div>
+        </div>
+        <div class="progress-track">
+          <div id="quiz-progress-fill" class="progress-fill" style="width: 10%;"></div>
+        </div>
+      </div>
+
+      <h2 id="quiz-question-text" style="font-size: 1.08rem; font-weight: 600;"></h2>
+
+      <div class="code-wrapper">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span>snippet</span>
+        </div>
+        <pre class="code-block"><code id="quiz-code-block"></code></pre>
+      </div>
+
+      <div id="quiz-options" class="quiz-options"></div>
+
+      <div id="quiz-explanation" class="feedback-box hidden" role="status"></div>
+
+      <div class="quiz-footer">
+        <button id="quiz-next-btn" type="button" class="btn btn--primary hidden">
+          Next Question →
+        </button>
+      </div>
+    </section>
+
+    <!-- Summary Scorecard -->
+    <section id="quiz-summary" class="card summary-card hidden" aria-label="Quiz Scorecard">
+      <span class="tag tag--emerald">Session Complete</span>
+      <div id="summary-score" class="summary-score">0 / 0</div>
+      <p id="summary-sub" class="summary-sub"></p>
+      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="practice-again-btn" type="button" class="btn btn--primary">Practice Again</button>
+        <a href="index.html" class="btn btn--secondary">Back to Dashboard</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    EngiLab Phase 1 (MVP) · Lab 1: Function Recap Engine
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/quiz-engine.js"></script>
+</body>
+
+</html>
